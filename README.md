@@ -1,0 +1,2 @@
+# bakimlab
+ bitirme projesi
