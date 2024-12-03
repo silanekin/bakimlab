@@ -1,2 +1,2 @@
 # bakimlab
- bitirme projesi
+ bitirme projesi mobil uygulama
