@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'giris_sayfasi.dart';
-import 'barkod_sayfasi.dart'; // Barkod Tarama Sayfası
-import 'altmenu_sayfasi.dart'; // Alt Menü Sayfası
+import 'anasayfa.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -43,5 +45,19 @@ class FirebaseInitialization extends StatelessWidget {
       },
     );
   }
+  void testFirestoreConnection() async {
+    try {
+      await FirebaseFirestore.instance.collection('test').add({'test': 'success'});
+      print("Firestore bağlantısı başarılı!");
+    } catch (e) {
+      print("Firestore bağlantısı başarısız: $e");
+    }
+  }
+  void main() {
+    WidgetsFlutterBinding.ensureInitialized();
+    testFirestoreConnection();
+    runApp(MyApp());
+  }
+
 }
 

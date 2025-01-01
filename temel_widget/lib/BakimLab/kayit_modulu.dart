@@ -76,175 +76,178 @@ class RegisterPage extends StatelessWidget {
         ),
         centerTitle: true,
       ),
-      body: Padding(
-        padding: const EdgeInsets.all(0.0),
-        child: Form(
-          key: _formKey,
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: <Widget>[
-              Padding(
-                padding: const EdgeInsets.only(left: 16.0),
-                child: Text(
-                  "Temiz Bakım, Güzel Seçim!",
-                  style: TextStyle(
-                    fontSize: 16,
-                    color: Colors.grey[700],
+      body: SingleChildScrollView( // Scroll özelliği ekleniyor
+        child: Padding(
+          padding: const EdgeInsets.all(0.0),
+          child: Form(
+            key: _formKey,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: <Widget>[
+                Padding(
+                  padding: const EdgeInsets.only(left: 16.0),
+                  child: Text(
+                    "Temiz Bakım, Güzel Seçim!",
+                    style: TextStyle(
+                      fontSize: 16,
+                      color: Colors.grey[700],
+                    ),
                   ),
                 ),
-              ),
-              SizedBox(height: 40),
-              Center(
-                child: Column(
-                  children: [
-                    Text(
-                      "Aramıza Hoşgeldiniz!",
-                      style: TextStyle(
-                        fontSize: 28,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.grey,
+                SizedBox(height: 40),
+                Center(
+                  child: Column(
+                    children: [
+                      Text(
+                        "Aramıza Hoşgeldiniz!",
+                        style: TextStyle(
+                          fontSize: 28,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.grey,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                SizedBox(height: 20),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 40.0),
+                  child: TextFormField(
+                    controller: firstNameController,
+                    decoration: InputDecoration(
+                      labelText: 'Ad',
+                      labelStyle: TextStyle(color: Colors.grey[700]),
+                      border: UnderlineInputBorder(),
+                    ),
+                    validator: (value) {
+                      if (value == null || value.isEmpty) {
+                        return 'Lütfen adınızı girin';
+                      }
+                      return null;
+                    },
+                  ),
+                ),
+                SizedBox(height: 16),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 40.0),
+                  child: TextFormField(
+                    controller: lastNameController,
+                    decoration: InputDecoration(
+                      labelText: 'Soyad',
+                      labelStyle: TextStyle(color: Colors.grey[700]),
+                      border: UnderlineInputBorder(),
+                    ),
+                    validator: (value) {
+                      if (value == null || value.isEmpty) {
+                        return 'Lütfen soyadınızı girin';
+                      }
+                      return null;
+                    },
+                  ),
+                ),
+                SizedBox(height: 16),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 40.0),
+                  child: TextFormField(
+                    controller: emailController,
+                    decoration: InputDecoration(
+                      labelText: 'E-posta',
+                      labelStyle: TextStyle(color: Colors.grey[700]),
+                      border: UnderlineInputBorder(),
+                    ),
+                    keyboardType: TextInputType.emailAddress,
+                    validator: (value) {
+                      if (value == null || value.isEmpty) {
+                        return 'Lütfen e-posta adresinizi girin';
+                      }
+                      return null;
+                    },
+                  ),
+                ),
+                SizedBox(height: 16),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 40.0),
+                  child: TextFormField(
+                    controller: passwordController,
+                    decoration: InputDecoration(
+                      labelText: 'Şifre',
+                      labelStyle: TextStyle(color: Colors.grey[700]),
+                      border: UnderlineInputBorder(),
+                    ),
+                    obscureText: true,
+                    validator: (value) {
+                      if (value == null || value.isEmpty) {
+                        return 'Lütfen şifrenizi girin';
+                      }
+                      return null;
+                    },
+                  ),
+                ),
+                SizedBox(height: 16),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 40.0),
+                  child: TextFormField(
+                    controller: confirmPasswordController,
+                    decoration: InputDecoration(
+                      labelText: 'Şifreyi tekrar giriniz',
+                      labelStyle: TextStyle(color: Colors.grey[700]),
+                      border: UnderlineInputBorder(),
+                    ),
+                    obscureText: true,
+                    validator: (value) {
+                      if (value == null || value.isEmpty) {
+                        return 'Lütfen şifrenizi tekrar girin';
+                      }
+                      return null;
+                    },
+                  ),
+                ),
+                SizedBox(height: 30),
+                Center(
+                  child: ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: Colors.black,
+                      padding: EdgeInsets.symmetric(horizontal: 80, vertical: 15),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(30),
                       ),
                     ),
-                  ],
-                ),
-              ),
-              SizedBox(height: 20),
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 40.0),
-                child: TextFormField(
-                  controller: firstNameController,
-                  decoration: InputDecoration(
-                    labelText: 'Ad',
-                    labelStyle: TextStyle(color: Colors.grey[700]),
-                    border: UnderlineInputBorder(),
-                  ),
-                  validator: (value) {
-                    if (value == null || value.isEmpty) {
-                      return 'Lütfen adınızı girin';
-                    }
-                    return null;
-                  },
-                ),
-              ),
-              SizedBox(height: 16),
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 40.0),
-                child: TextFormField(
-                  controller: lastNameController,
-                  decoration: InputDecoration(
-                    labelText: 'Soyad',
-                    labelStyle: TextStyle(color: Colors.grey[700]),
-                    border: UnderlineInputBorder(),
-                  ),
-                  validator: (value) {
-                    if (value == null || value.isEmpty) {
-                      return 'Lütfen soyadınızı girin';
-                    }
-                    return null;
-                  },
-                ),
-              ),
-              SizedBox(height: 16),
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 40.0),
-                child: TextFormField(
-                  controller: emailController,
-                  decoration: InputDecoration(
-                    labelText: 'E-posta',
-                    labelStyle: TextStyle(color: Colors.grey[700]),
-                    border: UnderlineInputBorder(),
-                  ),
-                  keyboardType: TextInputType.emailAddress,
-                  validator: (value) {
-                    if (value == null || value.isEmpty) {
-                      return 'Lütfen e-posta adresinizi girin';
-                    }
-                    return null;
-                  },
-                ),
-              ),
-              SizedBox(height: 16),
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 40.0),
-                child: TextFormField(
-                  controller: passwordController,
-                  decoration: InputDecoration(
-                    labelText: 'Şifre',
-                    labelStyle: TextStyle(color: Colors.grey[700]),
-                    border: UnderlineInputBorder(),
-                  ),
-                  obscureText: true,
-                  validator: (value) {
-                    if (value == null || value.isEmpty) {
-                      return 'Lütfen şifrenizi girin';
-                    }
-                    return null;
-                  },
-                ),
-              ),
-              SizedBox(height: 16),
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 40.0),
-                child: TextFormField(
-                  controller: confirmPasswordController,
-                  decoration: InputDecoration(
-                    labelText: 'Şifreyi tekrar giriniz',
-                    labelStyle: TextStyle(color: Colors.grey[700]),
-                    border: UnderlineInputBorder(),
-                  ),
-                  obscureText: true,
-                  validator: (value) {
-                    if (value == null || value.isEmpty) {
-                      return 'Lütfen şifrenizi tekrar girin';
-                    }
-                    return null;
-                  },
-                ),
-              ),
-              SizedBox(height: 30),
-              Center(
-                child: ElevatedButton(
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: Colors.black,
-                    padding: EdgeInsets.symmetric(horizontal: 80, vertical: 15),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(30),
-                    ),
-                  ),
-                  onPressed: () {
-                    if (_formKey.currentState!.validate()) {
-                      registerUser(context);
-                    }
-                  },
-                  child: Text(
-                    'KAYIT OL',
-                    style: TextStyle(color: Colors.white, fontSize: 20),
-                  ),
-                ),
-              ),
-              SizedBox(height: 20),
-              Center(
-                child: GestureDetector(
-                  onTap: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (context) => LoginPage()),
-                    );
-                  }, child: RichText(
-                    text: TextSpan(
-                      text: 'Zaten bir hesabım var. ',
-                      style: TextStyle(color: Colors.grey[600], fontSize: 14),
-                      children: [
-                        TextSpan(
-                          text: 'Giriş Yap!',
-                          style: TextStyle(color: Colors.grey[700], fontWeight: FontWeight.bold),
-                        ),
-                      ],
+                    onPressed: () {
+                      if (_formKey.currentState!.validate()) {
+                        registerUser(context);
+                      }
+                    },
+                    child: Text(
+                      'KAYIT OL',
+                      style: TextStyle(color: Colors.white, fontSize: 20),
                     ),
                   ),
                 ),
-              ),
-            ],
+                SizedBox(height: 20),
+                Center(
+                  child: GestureDetector(
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => LoginPage()),
+                      );
+                    },
+                    child: RichText(
+                      text: TextSpan(
+                        text: 'Zaten bir hesabım var. ',
+                        style: TextStyle(color: Colors.grey[600], fontSize: 14),
+                        children: [
+                          TextSpan(
+                            text: 'Giriş Yap!',
+                            style: TextStyle(color: Colors.grey[700], fontWeight: FontWeight.bold),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                ),
+              ],
+            ),
           ),
         ),
       ),

@@ -1,5 +1,12 @@
 import 'package:flutter/material.dart';
-import 'barkod_sayfasi.dart'; // Barkod Sayfası
+import 'package:temel_widget/BakimLab/urun_karsilastir_sayfasi.dart';
+import 'barkod_sayfasi.dart'; // Barkod Tarama Sayfası
+import 'arama_sayfasi.dart'; // Arama Sayfası
+import 'anasayfa_content.dart'; // Ana Sayfa İçeriği
+import 'profil_sayfasi.dart';
+import 'gecmis_sayfasi.dart';
+
+
 
 class AnaSayfa extends StatefulWidget {
   @override
@@ -12,10 +19,10 @@ class _AnaSayfaState extends State<AnaSayfa> {
   // Alt menüdeki sayfalar
   final List<Widget> _pages = [
     AnaSayfaContent(), // Ana Sayfa içeriği
-    Scaffold(body: Center(child: Text("Arama Sayfası"))), // Ara (placeholder)
+    AramaSayfasi(), // Arama Sayfası
     BarkodSayfasi(), // Barkod Tarama Sayfası
-    Scaffold(body: Center(child: Text("Karşılaştırma Sayfası"))), // Karşılaştır (placeholder)
-    Scaffold(body: Center(child: Text("Geçmiş Sayfası"))), // Geçmiş (placeholder)
+    UrunKarsilastirSayfasi(), // Karşılaştır
+    HistoryPage()// Geçmiş
   ];
 
   void _onItemTapped(int index) {
@@ -26,47 +33,46 @@ class _AnaSayfaState extends State<AnaSayfa> {
 
   @override
   Widget build(BuildContext context) {
+
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.white,
+        backgroundColor: Colors.transparent,
         elevation: 0,
-        toolbarHeight: 100,
-        centerTitle: true,
-        title: Column(
+        title: Row(
           children: [
-            Text(
-              "Bakımlab",
-              style: TextStyle(
-                fontSize: 28,
-                fontWeight: FontWeight.bold,
-                color: Colors.black,
-              ),
-            ),
-            Text(
-              "Temiz Bakım, Güzel Seçim!",
-              style: TextStyle(
-                fontSize: 16,
-                color: Colors.grey[700],
-              ),
+            Image.asset(
+              'lib/BakimLab/bakimLabLogo.png',
+              fit: BoxFit.contain,
+              height: 60,
             ),
           ],
         ),
+        centerTitle: true,
         actions: [
-          Padding(
-            padding: const EdgeInsets.only(right: 16.0),
-            child: CircleAvatar(
-              radius: 25,
-              backgroundImage: AssetImage('assets/user_photo.jpg'), // Kullanıcı fotoğrafı
+          GestureDetector(
+            onTap: () {
+              // Profil sayfasına yönlendirme
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => ProfilSayfasi()), // ProfilSayfasi'nı çağır
+              );
+            },
+            child: Padding(
+              padding: const EdgeInsets.only(right: 16.0),
+              child: CircleAvatar(
+                radius: 25,
+                backgroundImage: AssetImage('lib/BakimLab/default_image.jpg'), // Kullanıcı fotoğrafı
+              ),
             ),
           ),
         ],
       ),
-      body: _pages[_currentIndex],
+      body: _pages[_currentIndex], // Aktif sayfa gösteriliyor
       bottomNavigationBar: BottomNavigationBar(
         selectedItemColor: Colors.green,
         unselectedItemColor: Colors.grey,
-        currentIndex: _currentIndex,
-        onTap: _onItemTapped, // Alt menü tıklama olayı
+        currentIndex: _currentIndex, // Aktif menü
+        onTap: _onItemTapped, // Menüde tıklama
         items: [
           BottomNavigationBarItem(
             icon: Icon(Icons.home),
@@ -92,108 +98,6 @@ class _AnaSayfaState extends State<AnaSayfa> {
       ),
     );
   }
-}
 
-class AnaSayfaContent extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 16.0),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          SizedBox(height: 20),
-          Text(
-            "Önceden Arattıklarım",
-            style: TextStyle(
-              fontSize: 20,
-              fontWeight: FontWeight.bold,
-            ),
-          ),
-          SizedBox(height: 10),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Text(
-                "Tamamını Gör",
-                style: TextStyle(
-                  fontSize: 16,
-                  color: Colors.green,
-                ),
-              ),
-              Icon(Icons.arrow_forward, color: Colors.green),
-            ],
-          ),
-          SizedBox(height: 20),
-          Expanded(
-            child: GridView.builder(
-              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: 2,
-                crossAxisSpacing: 16.0,
-                mainAxisSpacing: 16.0,
-                childAspectRatio: 0.7,
-              ),
-              itemCount: 4, // Ürün sayısı
-              itemBuilder: (context, index) {
-                return ProductCard(
-                  imagePath: 'assets/product_$index.jpg', // Ürün resimleri
-                  productName: 'Ürün $index',
-                );
-              },
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-}
 
-class ProductCard extends StatelessWidget {
-  final String imagePath;
-  final String productName;
-
-  ProductCard({required this.imagePath, required this.productName});
-
-  @override
-  Widget build(BuildContext context) {
-    return Card(
-      elevation: 2,
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Image.asset(
-            imagePath,
-            height: 100,
-            fit: BoxFit.cover,
-          ),
-          SizedBox(height: 10),
-          Text(
-            productName,
-            style: TextStyle(
-              fontSize: 16,
-              fontWeight: FontWeight.bold,
-            ),
-            textAlign: TextAlign.center,
-          ),
-          SizedBox(height: 10),
-          ElevatedButton(
-            onPressed: () {
-              // "Analiz Et" butonuna tıklama olayı
-            },
-            style: ElevatedButton.styleFrom(
-              backgroundColor: Colors.green,
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(8),
-              ),
-            ),
-            child: Text(
-              'Analiz Et',
-              style: TextStyle(color: Colors.white),
-            ),
-          ),
-        ],
-      ),
-    );
-  }
 }

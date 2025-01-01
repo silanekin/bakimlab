@@ -34,7 +34,10 @@ dependencies:
   firebase_auth: ^5.3.3
   cloud_firestore: ^5.5.0
   mobile_scanner: ^3.0.0
-
+  http: ^1.2.2
+  firebase_storage: ^12.3.6
+  image_picker: ^1.0.5
+  barcode_scan2: ^4.2.0
 
 
   # The following adds the Cupertino Icons font to your application.
@@ -64,7 +67,7 @@ flutter:
   uses-material-design: true
   assets:
     - lib/BakimLab/bakimLabLogo.png
-
+    - lib/BakimLab/default_image.jpg
   # To add assets to your application, add an assets section, like this:
   # assets:
   #   - images/a_dot_burr.jpeg
